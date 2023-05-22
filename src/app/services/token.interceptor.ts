@@ -25,7 +25,8 @@ constructor(private authService : AuthService) {}
 intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
   const g = "/login";
-  if(request.url.search(g) === -1){
+  const r ="/register"
+  if(request.url.search(g) === -1&&request.url.search(r) === -1){
     let jwt = this.authService.getToken();
   let reqWithToken = request.clone( {
   setHeaders: { Authorization : "Bearer "+jwt}

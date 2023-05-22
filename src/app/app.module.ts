@@ -17,6 +17,11 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
 import { SearchFilterPipe } from './search-filter.pipe';
+import { RegisterComponent } from './register/register.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -32,6 +37,11 @@ import { SearchFilterPipe } from './search-filter.pipe';
     LoginComponent,
     ForbiddenComponent,
     SearchFilterPipe,
+    RegisterComponent,
+    AllUsersComponent,
+    EditUserComponent,
+    AddUserComponent,
+    ProfileComponent,
     
   ],
   imports: [

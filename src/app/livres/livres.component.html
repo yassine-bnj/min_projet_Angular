@@ -10,6 +10,7 @@
                     <th>Nb Pages</th>
                     <th>Date Création</th>
                     <th>Type</th>
+                    <th>image</th>
                     <th></th>
                     <th></th>
 
@@ -22,10 +23,15 @@
                         <td>{{livre.nbPages}}</td>
                         <td>{{livre.dateParution | date:'dd/MM/yyyy'}}</td>
                         <td>{{livre.type.nomType}}</td>
+<td>
+
+<img [src]="livre.image.image" class="card-img-top img-fluid rounded-start"   style="width: 50px; height: 50px" />
+</td>
+
                         <!-- *ngIf="authService.isAdmin()" 
                         *ngIf="authService.isAdmin()"-->
-                        <td><a class="btn btn-danger"  (click)="supprimerLivre(livre)">Supprimer</a></td>
-                        <td><a class="btn btn-warning"  [routerLink]="['/updateLivre',livre.idLivre]">Modifier</a>
+                        <td *ngIf="authService.isAdmin()"><a  class="btn btn-danger"  (click)="supprimerLivre(livre)">Supprimer</a></td>
+                        <td *ngIf="authService.isAdmin()"><a class="btn btn-warning"  [routerLink]="['/updateLivre',livre.idLivre]">Modifier</a>
                         </td>
                     </tr>
                 </tbody>

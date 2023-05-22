@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../model/user.model';
@@ -12,7 +12,7 @@ export class AuthService {
 token!:any;
  /* users: User[] = [{"username":"admin","password":"123","roles":['ADMIN']},
   {"username":"nadhem","password":"123","roles":['USER']} ];*/
-  public loggedUser?:string;
+  public loggedUser!:string;
 public isloggedIn: Boolean = false;
 public roles?:string[];
   constructor(private router:Router,
@@ -67,6 +67,16 @@ public roles?:string[];
     ;
   }  
 
+  isSuperAdmin():Boolean{
+    if (!this.roles) //this.roles== undefiened
+    return false;
+    return (this.roles.indexOf('SUPERADMIN') >-1) ;
+    ;
+  }  
+
+
+
+
 
   logout() {
   this.loggedUser = undefined!;
@@ -94,5 +104,52 @@ public roles?:string[];
   {
     return  this.helper.isTokenExpired(this.token);   
   }
+
+
+  addUser(user : User){
+    return this.http.post<User>(this.apiURL+'/Userapi/users', user, {observe:'response'});
+
+  }
+
+  deleteUser(id : number){
+    return this.http.delete<User>(this.apiURL+'/Userapi/users/'+id, {observe:'response'});
+  }
+
+  getAllUsers(){
+    return this.http.get<User[]>(this.apiURL+'/Userapi/users/all');
+  }
+
+
+  updateUser(user : User){
+    return this.http.put<User>(this.apiURL+'/Userapi/users', user, {observe:'response'});
+  }
+
+  getUserById(id : number){
+    return this.http.get<User>(this.apiURL+'/Userapi/users/'+id);
+  }
+   
+
+  getUserByUsername(username : string){
+    return this.http.get<User>(this.apiURL+'/Userapi/users/getByusername/'+ username);
+  }
+  
+
+  registerUser(user :User){
+    return this.http.post<User>(this.apiURL+'/Userapi/users/register', user, {observe:'response'});
+  }
+
+
+  changePassword(oldPass : string, newPass : string,id : number){
+
+    const body = new HttpParams()
+    .set('oldPass', oldPass)
+    .set('newPass', newPass);
+
+    return this.http.put<User>(this.apiURL+'/Userapi/users/changePassword/'+id,body, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }});
+  }
+
+  
+
 
 }

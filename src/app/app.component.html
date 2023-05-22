@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <!-- *ngIf="authService.token" -->
+
   <nav *ngIf="authService.token" class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
     <a class="navbar-brand" href="#">Gestion Livres</a>
@@ -22,7 +22,7 @@
           Livres
         </a>
         <div class="dropdown-menu">
-          <!--  *ngIf="authService.isAdmin()" -->
+        
           <a class="dropdown-item" *ngIf="authService.isAdmin()" routerLink="/add-livre" >Ajouter</a>
           <a class="dropdown-item" routerLink="/livres">Lister</a>
           <a class="dropdown-item" routerLink="/rechercheParType" >Recherche Par Type</a>
@@ -30,9 +30,23 @@
 
         </div>
       </li>
-      <!-- *ngIf="authService.isAdmin()" -->
+      
+     
       <li *ngIf="authService.isAdmin()" class="nav-item">
         <a class="nav-link"   routerLink="/listeTypes">Types Livres</a>
+      </li>
+      <!-- Dropdown -->
+      <li *ngIf="authService.isSuperAdmin()" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Utilisateurs
+        </a>
+        <div class="dropdown-menu">
+       
+          <a class="dropdown-item" *ngIf="authService.isAdmin()" routerLink="/addUser" >Ajouter</a>
+          <a class="dropdown-item" routerLink="/allUsers">Lister</a>
+         
+
+        </div>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -44,7 +58,7 @@
         <div class="dropdown-menu">
           <a class="dropdown-item"  *ngIf="!authService.token" routerLink="/login">login</a>
           <a class="dropdown-item"  *ngIf="authService.token" (click)="authService.logout()">logout</a>
-          <a class="dropdown-item"  *ngIf="authService.token" href="#">Profile</a>
+          <a class="dropdown-item"  *ngIf="authService.token" routerLink="/profile">Profile</a>
         </div>
       </li>
     </ul>

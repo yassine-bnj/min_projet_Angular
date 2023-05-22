@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -9,15 +9,22 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'MesLivres';
-  constructor (public authService: AuthService,private router:Router) {}
+  id!:number
+  constructor (public authService: AuthService,private router:Router,private route: ActivatedRoute,
+  
+    ) {
+  
+    }
   ngOnInit () {
+   
+    const currentRoute = this.router.url;
+    console.log(currentRoute)
     this.authService.loadToken();
-    if (this.authService.getToken()==null ||
-    this.authService.isTokenExpired()
-     )       
+    if (currentRoute !== '/register' &&this.authService.getToken()==null ||
+    this.authService.isTokenExpired()  
+     )   
 
-
-    this.router.navigate(['/login']);
+ this.router.navigate(['/login']);
     
     
     

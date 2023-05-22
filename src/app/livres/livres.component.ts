@@ -21,6 +21,13 @@ export class LivresComponent implements OnInit {
     this.livreService.listeLivres().subscribe(livres => {
       console.log(livres);
       this.livres = livres;
+      
+
+this.livres.forEach(livre => {
+  livre.image.image = 'data:' + livre.image.type + ';base64,' + livre.image.image;
+});
+
+
       });
   }
 

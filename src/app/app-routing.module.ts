@@ -9,6 +9,12 @@ import { LoginComponent } from './login/login.component';
 import { RechercheParTitreComponent } from './recherche-par-titre/recherche-par-titre.component';
 import { RechercheParTypeComponent } from './recherche-par-type/recherche-par-type.component';
 import { UpdateLivreComponent } from './update-livre/update-livre.component';
+import { RegisterComponent } from './register/register.component';
+import { AllUsersComponent } from './all-users/all-users.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { UserGuard } from './user.guard';
 
 const routes: Routes = [
   { path: "livres", component: LivresComponent },
@@ -19,6 +25,11 @@ const routes: Routes = [
   {path: "rechercheParTitre", component : RechercheParTitreComponent},
   {path: "listeTypes", component : ListeTypesComponent,canActivate:[LivreGuard]},
   {path: 'login', component: LoginComponent},
+  {path:'register',component:RegisterComponent},
+  {path: 'allUsers',component:AllUsersComponent,canActivate:[UserGuard]},
+  {path:'addUser',component:AddUserComponent,canActivate:[UserGuard]},
+  {path:'updateUser/:id',component:EditUserComponent,canActivate:[UserGuard]},
+  {path:'profile',component:ProfileComponent},
   {path: 'app-forbidden', component: ForbiddenComponent},
 ];
 
